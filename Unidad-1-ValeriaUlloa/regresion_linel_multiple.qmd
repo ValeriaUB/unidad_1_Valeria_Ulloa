@@ -1,0 +1,395 @@
+---
+title: Regresion_lineal_multiple
+author: Nelson Sarmiento,Nayeli Ramon, Valeria Ulloa
+format: html 
+editor: visual
+---
+
+# Aprendizaje estadístico
+
+En general, la relación de los valores de entrada y salida se puede escribir de la sifuiente forma:
+
+$$ Y = f(X) + ∊ $$
+
+Esto se centra en la estimación de f desde varios enfoques. Existen 2 razones principales para estimar f:
+
+### Predicción
+
+En este punto es necesario entender que un conjunto de entradas (x) está facilmente disponible mientras que las salidas (y) no son faciles de obtener ya que existe la posibilidad del error, si tomamos que el término de error es un promedio 0 pordemos predecir siguiendo la fórmula:
+
+$$ Y' = f'(X) $$
+
+f' : estimación para f.
+
+Y': predicción resultante para Y.
+
+Por lo general, dentro de esta fórmula la forma de f' no es tomada en cuenta siempre que produzca las predicciones precisas para Y.
+
+La precisión de Y' depende de 2 errores el reducible y el irreducible.
+
+-   Reducible: Este error se puede minimizar usando la técnica de aprendizaje estadístico, más apropiada para estimar f.
+-   Irreducible: Este error se debe a que Y también en una función de ∊.
+
+### Inferencia
+
+Dentro de la inferencia es necesario tomar en cuenta que nos interesa saber la forma exacta de f'. Esto se debe a que nos interesa conocer la asociación entre cada variable y probabilidad a diferencia de la predicción que se interesa más en la precisión del resultado.
+
+## Estimar f
+
+Una forma de estimar f es aplicar el método de aprendizaje estadístico a los datos de entrenamiento, estos métodos se pueden caracterizar como paramétricos y no paramétricos:
+
+-   Paramétricos: se basa en modelos de 2 pasos, hacer la suposición de la forma funcional y utilizar el procedimeinto que use los datos de entrenamiento para ajustar el modelo. Este enfoque reduce el problema de estimar f a estimar un conjunto de parámetros.
+
+    nota: Una desventaja de este enfoque es que el modelo por lo general no coincide con la verdadera forma de f.
+
+-   No paramétricos: No se hace supociones de la forma funcional de f, se busca una estimación de f que se acerque lo mejor posible a los puntos de datos sin ser demasiado ondulado. Evita la posibilidad que el modelo no se ajuste a los datos.
+
+    nota: Una desventaja es que se requiere un gran numero de observaciones para obtener la estimación precisas de f.
+
+### La compesación entre la precisión de la predicción y la interpretabilidad del modelo
+
+La flexibilidad de un modelo se puede establecer en base de cuantas formas para estimar f puede producir, un ejemplo de modelo inflexible puede ser la regresión lineal debido a que solo genera funciones lineales.
+
+Por otro lado existen otros metodos como plate splines son considerados flexibles ya que puede generar más posibilidades de estimar f.
+
+La selección del modelo se basa en lo que se busca responder, por ejemplo si se desea obtener la inferencia un modelo más restrictivo es más interpetable.
+
+### Aprendizaje supervisado vs no supervisado
+
+En el aprendizaje estadístico se tiene dos categorías: supervisado o no supervisado.
+
+En el aprendizaje supervisado cada observación de las medidas predictoras tiene una medida de respuesta asociada. Se desea ajustar un modelo que relacione la respuesta con los predictores, con el objetivo de tener una mejor precisión en la respuesta para futuras observaciones (predicción) o comprender mejor la relación entre la respuesta y los predictores (inferencia).
+
+Por su parte el aprendizaje no supervisado describe una situación donde para cada observación se tiene un vector de medidas pero ninguna respuesta asociada, por lo cual no es posible ajustar un modelo de regresión lineal, ya que no hay una variable de respuesta que predecir.
+
+#### Problemas de regresión vs clasificación
+
+Problemas de regresión: Problemas con respuestas cuantitativas (valores numéricos).
+
+Problemas de clasificación: Problemas con una respuesta cualitativa (categóricas).
+
+Sin embargo hay que tomar en cuenta ciertos casos como:
+
+La regresión lineal de mínimos cuadrados tiene una respuesta cuantitativa mientras que la regresión logística usa una respuesta cualitativa.
+
+### Evaluación de la precisión del modelo
+
+Debido a la naturaleza de los diferentes tipos de datos es necesario elegir que método produce el mejor resultado, esta puede ser una de las partes más desafiantes.
+
+#### Medición de la calidad de ajuste
+
+Al evaluar el rendimiento de un método de aprendizaje estadístico es necesario cuantificar hasta que punto el valor de respuesta pronosticado para una observación se acerca al valor real de esa observación. Dentro de la regresión se utiliza el error cuadrático medio (MSE):
+
+![](formula.png)
+
+El MSE se calcula utilizando los datos de entrenamiento que se usaron al ajustar el modelo.
+
+# Regresión lineal
+
+Es un método de aprendizaje supervisado, se puede lograr predecir una respuesta cuantitativa, esto, con el objetivo de poder procesar dos o más grupos de datos y encontrar una relación entre ellos.
+
+Así también, la regresión lineal se convierte en una herramienta útil al tener datos con una tendencia lineal de relación logrando cuantificar su relación de interacción.
+
+### Regresión lineal simple
+
+Es aplicada para predecir una respuesta cuantitativa *Y* a partir de una variable predictiva única *X,* esto suponiendo que existe una relación casi lineal entre X y Y. Esto se puede representar en una ecuación como:
+
+$$Y ≈ 𝛽0 + 𝛽1X + ∊$$
+
+La ecuación se representaría como: "Regresión de Y sobre X", en donde 𝛽0+𝛽1 son parámetros desconocidos que representan la intersección y la pendiente de los parámetros. Una vez utilizados datos de entrenamiento para estimar 𝛽0+𝛽1 se podrá realiza una predicción de datos futuros.
+
+### Estimación de coeficientes 𝛽0+𝛽1
+
+El objetivo principal es obtener valores pertenecientes a cada uno de los coeficientes, tal que, se logre obtener o describir un modelo lineal, esto se logra mediante la representación de "pares de observaciones" en las cuales se obtengan una medida de X y una medida de Y, eso con el objetivo de tener estimaciones para los coeficientes 𝛽0, 𝛽1 tal que el modelo se ajuste a los datos disponibles hasta encontrar una intersección 𝛽0 y una pendiente 𝛽1, esto se lo puede lograr con el criterio de mínimos cuadrados. Se muestra un ejemplo de la relación lineal entre las ventas de una empresa y los gastos de publicidad en TV.
+
+![Relacion lineal](Relacion%20lineal.png)
+
+Es importante considerar el nivel de error en la aproximación, el cual determina la posible variación en el eje Y que hace que los datos no tengan un carácter lineal. Esto define la línea de regresión de la población. Aplicando la estrategia de mínimos cuadrados podemos obtener una nueva línea basada en los datos observados.
+
+![Conjunto de datos](Conjunto%20de%20datos.png)
+
+En la figura de la derecha se observa en color rojo la línea real de aproximación, mientras en color negro la línea de mínimos cuadrados en base a las observaciones, mientras que en la derecha se observan líneas basadas en mínimos cuadrados calculadas mediante observaciones aleatorias, estas estimaciones no se alejan demasiado de la regresión lineal de la población (línea roja).
+
+Como conclusión la regresión lineal simple es un enfoque útil para predecir una respuesta sobre la base de una única variable predictora.
+
+### Regresión lineal múltiple
+
+A diferencia de la regresión lineal simple, en la realidad existe más de un predictor, por ello, en vez de realizar varias regresiones lineales simples en donde se sesgan varios datos se debe realizar una regresión lineal múltiple. Esto se puede representar en una ecuación como:
+
+$$
+Y ≈ 𝛽_0 + 𝛽_1X_1 + 𝛽_2X_2+...+ 𝛽_pX_p + ∊
+$$
+
+En donde X1, X2 ... Xp con índices predictores.
+
+#### Estimación de los coeficientes de regresión
+
+Al igual que en la regresión lineal simple los coeficientes 𝛽0, 𝛽1 ... 𝛽p son los que deben estimarse y en base a estas estimaciones se pueden llagar a hacer predicciones. Para esta estimación se utiliza el mismo enfoque de mínimos cuadrados.
+
+Para representar las estimaciones de coeficientes de regresión lineal múltiple se lo debe hacer mediante algebra matricial por medio de un paquete estadístico.
+
+Es necesario responder ciertas preguntas al realizar regresión lineal múltiple:
+
+-   **¿Existe alguna relación entre la respuesta y los predictores?**
+
+    En este caso se debe plantear una hipótesis nula en donde 𝛽0, 𝛽1 ... 𝛽p = 0 y una hipótesis alternativa, en donde 𝛽0, 𝛽1 ... 𝛽p ≠ 0 , aplicando la fórmula podemos obtener un falor de F en el cual se determina un valor cercano a 1 cuando no hay relación entre la pregunta y la respuesta, mientras que si existiera relación el valor sería superior a 1.
+
+-   **Decidir sobre variables importantes**
+
+    Al determinar que los predictores si tienen una relación con las peguntas es necesario determinar cuales de ellos establecen esta relación. Para ello, es necesario realizar una selección de variables aplicando el método de Criterio de Información de Akaike u otro a conveniencia. Estos establecen 3 enfoques clásicos:
+
+-   Selección hacia adelante: Implica iniciar con un modelo nulo, se ajustan regresiones lineales simples y se selecciona la variable con carácter mas bajo continuando con el ejercicio hasta cumplir con la regla de detención.
+
+-   Selección hacia atrás: Se inicia con todas las variables, eliminando la variable con carácter mas alto, es decir, la menos significativa estadísticamente.
+
+-   Selección mixta: es una combinación de selección hacia adelante y hacia atrás
+
+![Grafica con 2 predictores](Dos%20predictores.png)
+
+Se observa una grafica de los datos obtenidos, en donde existen 2 predictores y una sola respuesta, esto en un plano 3D.
+
+Al ajustar un modelo a una regresión lineal pueden ocurrir varios problemas, entre los cuales están:
+
+-   **No linealidad de las relaciones respuesta-predictor:** Esto conlleva a que todas las conclusiones sean cuestionables y la precisión de predicción se reducen significativamente, esto se lo puede evitar aplicando los " gráficos de residuos"
+
+-   **Valores atípicos:** Estos valores surgen entre una de sus razones por el registro incorrecto de una observación durante la recopilación de datos, así mismo se pueden utilizar " gráficos de residuos" para determinar el valor atípico y retíralo, esto mejorará la ecuación de linealidad obtenida.
+
+-   **Puntos de apalancamiento:** son observaciones que se encuentran fuera del conglomerado de datos, esto produce que la ecuación de linealidad tienda a flexionarse de acuerdo al nivel de apalancamiento de la observación, mientras mas alejada este la observación del conjunto de observaciones mayor grado de apalancamiento habrá.
+
+![Apalancamiento](apalancamiento.png)
+
+Como se observa en la figura de la izquierda, la observación 41 presenta un mayor grado de apalancamiento con respecto a la observación 20, así mismo, en la figura central se evidencia una observación inusual fuera del grupo de datos, esto produce un alto apalancamiento; mientras que en la figura de la derecha se observa un punto 41 con un grado muy alto de apalancamiento.
+
+## Laboratorio 3
+
+## Librerías
+
+Usamos la función Library() para cargar librerías, funciones o datasets que no estén incluidos en R, en este caso incluiremos las librerías: MASS, que contiene una gran colección de datasets y funciones, por otro lado, necesitaremos la librería ISLR2 que incluye datasets relacionados al libro guía.
+
+```{r}
+library(MASS)
+library(ISLR2)
+```
+
+## Regresión Lineal Simple
+
+Uno de los datasets es Boston que registra "medv" que es el valor medio de la casa, para 506 distritos de Boston; en este laboratorio se tratará de predecir medv usando parámetros como rm (número de promedio de habitaciones), age (edad de la casa), lstat (Porcentaje de hogares con bajo status económico).
+
+```{r}
+head (Boston)
+```
+
+Utilizando la función lm(), ajustaremos un modelo de regresión lineal simple definiendo los siguientes parámetros: respuesta será medv, el predictor será Istat.
+
+En una siguiente línea de código, adjuntamos el dataset Boston de tal manera que la función reconozca las variables.
+
+```{r}
+lm.fit <- lm(medv ~ lstat , data = Boston)
+attach (Boston)
+lm.fit <- lm(medv ~ lstat)
+```
+
+Para obtener más información sobre el modelo utilizado, podemos digitar "lm.fit" o "summary(lm.fit)" para obtener información más detallada sobre el modelo.
+
+```{r}
+lm.fit
+summary(lm.fit)
+```
+
+Así mismo, podemos llamar la función "names()" para encontrar que infromación se guardó en lm.fit.
+
+```{r}
+names(lm.fit)
+```
+
+Por otro lado, podemos obtener el intervalo de confianza para la estimación de los coeficientes utilizando el comando "confint()"
+
+```{r}
+confint(lm.fit)
+```
+
+La función "predict", puede ser utilizada para producir intervalos de confianza y de predicción para medv dado un valor de lstat.
+
+```{r}
+predict (lm.fit , data.frame(lstat = (c(5, 10, 15))),
+interval = "confidence")
+predict (lm.fit , data.frame(lstat = (c(5, 10, 15))),
+interval = "prediction")
+```
+
+Ahora trazaremos medv y lstat junto con una línea de regresión de mínimos cuadrados con las funciones plot() y abline().
+
+```{r}
+plot(lstat, medv)
+abline(lm.fit)
+```
+
+Ahora, la función "abline()" puede dibujar cualquier línea, incluso, podemos dibujar una con intersección y pendiente determinadas, solo necesitamos indicar estos parámetros en el argumento de la función, así mismo, podemos ser capaces de variar el ancho de la línea con el comando "lw=", así mismo, podemos especificar el color que deseamos para nuestra línea en específico con el comando "col="; por otro lado usamos "pch" para crear diferentes símbolos de trazado.
+
+```{r}
+plot(lstat, medv)
+abline (lm.fit , lwd = 3)
+plot(lstat, medv)
+abline (lm.fit , lwd = 3, col = " red ")
+plot (lstat , medv , col = " red ")
+plot (lstat , medv , pch = 20)
+plot (lstat , medv , pch = "+")
+plot (1:20, 1:20, pch = 1:20)
+```
+
+Mediante las funciones "par()" y "mfrow()" dividiremos la pantalla de visualización en paneles separados que permitan ver varios gráficos simultáneamente a elección, esto nos servirá para visualizar individualmente los diagramas de diagnóstico que se producen con la función "plot()" directamente de la salida de "lm()".
+
+```{r}
+par (mfrow = c(2, 2))
+plot (lm.fit)
+```
+
+Así mismo, se puede calcular los residuos de un ajuste de regresión lineal usando la función "residuals()"; la función "rstudent()" devolverá los residuos estudentizados, y podemos usar esta función para graficar los residuos contra los valores ajustados.
+
+```{r}
+plot ( predict (lm.fit), residuals (lm.fit))
+plot ( predict (lm.fit), rstudent (lm.fit))
+```
+
+En las gráficas residuales, notamos que no existe linealidad; las estadísticas de leverage pueden ser calculadas para cualquier número de predictores mediante la función "hatvalues()".
+
+Así mismo, la función "which.max()" identifica el índice del elemento más grande de un vectos, en este caso nos dirá qué observación tiene la mayor estadística de leverage.
+
+```{r}
+plot ( hatvalues (lm.fit))
+which.max ( hatvalues (lm.fit))
+```
+
+## Regresión Lineal Múltiple
+
+Ahora, para ajustar un modelo de regresión lineal simple, nuevamente usamosd"lim()", pero con una sintaxis diferente, pues se utilizan 3 predictores; con la función"summary()" se generarán los coeficientes de regresión para todos los predictores.
+
+```{r}
+lm.fit <- lm(medv ~ lstat + age , data = Boston)
+summary (lm.fit)
+```
+
+El conjunto de datos de Boston contiene 12 variables, para generar una regresión lineal con todos estos se puede utilizar la siguiente abreviatura:
+
+```{r}
+lm.fit <- lm(medv ~ ., data = Boston)
+summary (lm.fit)
+```
+
+Podemos acceder a los componentes individuales de un objeto de la función "summary()" por su nombre, ingresando "?summary.lm" para ver qué hay disponible. Por lo tanto, summary(lm.fit)\$r.sq nos da el R2 (Coeficiente de determinación), y summary(lm.fit)\$sigma nos da el RSE (error estándar de la estimación).
+
+La función vif() esparte del paquete "car", la utilizamos para calcular los factores de inflación de la varianza. La mayoría de los "VIF" son de bajos a moderados para estos datos. El paquete "car" no forma parte de la instalación básica de R, por lo debemos descargar la primera vez que lo usemos con el siguiente comando a través de la función install.packages() en R.
+
+```{r}
+install.packages("car")
+```
+
+```{r}
+library (car)
+vif (lm.fit)
+```
+
+Ahora, si queremos hacer una regresión con todas las variables, excepto una, por ejemplo en la regresión realizada en el bloque anterior tiene un valor p alto, pues, utlizamos la siguiente sintaxis:
+
+```{r}
+lm.fit1 <- lm(medv ~ . - age , data = Boston)
+summary (lm.fit1)
+```
+
+Para el mismo efecto, podemos utilizar la función "update()":
+
+```{r}
+lm.fit1 <- update (lm.fit , ~ . - age)
+```
+
+## Términos de interacción
+
+Para un modelo lineal utilizando la función "lm()", se pueden incluir términos de interacción entre lstat:black que le dice a R que incluya cierto término de interacción como predictores, en este caso, se volvió a incluir como predictor a la variable "age":
+
+```{r}
+summary (lm(medv ~ lstat * age , data = Boston))
+```
+
+## Transformaciones no lineales de los predictores
+
+Otra función de "lm()" puede acomodar transformaciones no lineales de los predictores, por ejemplo, podemos crear un predictor X\^2 con "I(X\^2)", esta función "I()" nos permite elevar X a la potencia 2, entonces, hacemos una regresión de medv en lstat y lstat2.
+
+```{r}
+lm.fit2 <- lm(medv ~ lstat + I(lstat^2))
+summary (lm.fit2)
+```
+
+Un valor p cercano a cero asociado con el término cuadrático sugiere que se tiene un modelo mejorado. Usando la función "anova()" para cuantificar aún más la medida en que el ajuste cuadrático es superior al ajuste lineal.
+
+```{r}
+lm.fit <- lm(medv ~ lstat)
+anova (lm.fit , lm.fit2)
+```
+
+Aquí el modelo 1 representa el submodelo lineal que contiene un solo predictor que es lstat, por su parte Modelo 2 que corresponde a un modelo cuadrático más grande con dos predictores lstar y lstat2. La función "anova()" realiza una prueba de hipótesis comparando los dos modelos, la hipótesis nula es que ambos modelos ajustan datos correctamente y la hipótesis alternativa es que todo el modelo es superior. Aquí el estadístico F es 135 y el valor p asociado es prácticamente cero, evidenciando que el modelo que contiene ambos predictores, es muy superior al modelo que solo tiene un predictor, esto podemos relacionarlo con que, de acuerdo con lo que vimos la no linealidad en relación entre "medv" y "lstat"
+
+```{r}
+par (mfrow = c(2, 2))
+plot (lm.fit2)
+```
+
+Nos percatamos que cuando el término lstat2 se incluye en el modelo hay un patrón poco perceptible en los residuos. Para crear un ajuste cúbico se puede incluir un predictor de la forma "I(X\^3)", y podemos trabajarlo de esa manera para polinomios de orden superior, ahora, también podemos utilizar la función "poly()" para crear este polinomio dentro de "lm()", en el siguiente bloque de código podemos ver su aplicación para incluir un polinomio de quinto grado.
+
+```{r}
+lm.fit5 <- lm(medv ~ poly (lstat , 5))
+summary (lm.fit5)
+```
+
+Este análisis sugiere que incluir términos polinómicos adicionales, hasta el quinto orden, generan una mejora en el ajuste del modelo.
+
+Por defecto, "poly()" ortogonaliza los predictores, esto significa que las características que genera esta función no son simplemente una secuencia de potencias del argumento. Sin embargo, un modelo lineal aplicado a la salida de la función "poly()" tendrá los mismos valores ajustados que un modelo lineal aplicado a los polinomios sin procesar, ahora, para conseguirlos se deberá usar el argumento "raw=TRUE"
+
+```{r}
+summary (lm(medv ~ log(rm), data = Boston))
+```
+
+## Predictores cualitativos
+
+En la librería ISLR2 existe un dataset de "Carseats", a continuación se intenta predecir las ventas de asientos de seguridad para niños en 400 ubicaciones en función de una serie de predictores.
+
+Los datos de "carseats" incluyen predictores como "Shelveloc", un indicador de la calidad de la ubicación de las estanterías, tomando tres posibles valores: malo, medio y bueno.
+
+Dada una variable cualitativa como Shelveloc, R genera automáticamente variables ficticias. A continuación ajustamos un modelo de regresión múltiple que incluye algunos términos de interacción.
+
+```{r}
+head (Carseats)
+lm.fit <- lm(Sales ~ . + Income:Advertising + Price:Age ,
+data = Carseats)
+summary (lm.fit)
+```
+
+La función "contrasts()" devuelve la codificación que usa R para la variable ficticia:
+
+```{r}
+attach (Carseats)
+contrasts (ShelveLoc)
+```
+
+R ha creado una variable ficticia ShelveLocGood que toma el valor 1 si la ubicación de la estantería es buena y 0 en caso contrario. También ha creado una variable ficticia ShelveLocMedium que equivale a 1 si la ubicación de la estantería es mediana y 0 en caso contrario. Una ubicación de estantería incorrecta corresponde a un cero para cada una de las dos variables ficticias. El hecho de que el coeficiente de ShelveLocGood en el resultado de la regresión sea positivo indica que una buena ubicación de estanterías está asociada con altas ventas (en relación con una mala ubicación).
+
+## Escribiendo funciones
+
+La función "LoadLibraries()" es una función en programación que se utiliza para cargar librerías o bibliotecas de código en un programa o aplicación, a continuación escribiremos una función simple que lea las bibliotecas ISLR2 y MASS:
+
+```{r}
+LoadLibraries <- function (){
++ library (ISLR2)
++ library (MASS)
++ print ("The libraries have been loaded .")
+}
+```
+
+Ahora, si tipeamos "LoadLibraries", R nos dirá qué hay dentro de una función. Y si llamamos a la función "LoadLibraries()" estaremos llamando a la función.
+
+```{r}
+LoadLibraries
+```
+
+```{r}
+#LoadLibraries()
+```

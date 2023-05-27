@@ -1,0 +1,123 @@
+---
+title: "Regresion_lineal_multiple"
+author: "Nelson Sarmiento","Nayeli Ramon", "Valeria Ulloa"
+format: pdf
+editor: visual
+---
+
+# Aprendizaje estadístico
+
+En general, la relación de los valores de entrada y salida se puede escribir de la sifuiente forma:
+
+$$ Y = f(X) + ∊ $$
+
+Esto se centra en la estimación de f desde varios enfoques. Existen 2 razones principales para estimar f:
+
+### Predicción
+
+En este punto es necesario entender que un conjunto de entradas (x) está facilmente disponible mientras que las salidas (y) no son faciles de obtener ya que existe la posibilidad del error, si tomamos que el término de error es un promedio 0 pordemos predecir siguiendo la fórmula:
+
+$$ Y' = f'(X) $$
+
+f' : estimación para f.
+
+Y': predicción resultante para Y.
+
+Por lo general, dentro de esta fórmula la forma de f' no es tomada en cuenta siempre que produzca las predicciones precisas para Y.
+
+La precisión de Y' depende de 2 errores el reducible y el irreducible.
+
+-   Reducible: Este error se puede minimizar usando la técnica de aprendizaje estadístico, más apropiada para estimar f.
+-   Irreducible: Este error se debe a que Y también en una función de ∊.
+
+### Inferencia
+
+Dentro de la inferencia es necesario tomar en cuenta que nos interesa saber la forma exacta de f'. Esto se debe a que nos interesa conocer la asociación entre cada variable y probabilidad a diferencia de la predicción que se interesa más en la precisión del resultado.
+
+## Estimar f
+
+Una forma de estimar f es aplicar el método de aprendizaje estadístico a los datos de entrenamiento, estos métodos se pueden caracterizar como paramétricos y no paramétricos:
+
+-   Paramétricos: se basa en modelos de 2 pasos, hacer la suposición de la forma funcional y utilizar el procedimeinto que use los datos de entrenamiento para ajustar el modelo. Este enfoque reduce el problema de estimar f a estimar un conjunto de parámetros.
+
+    nota: Una desventaja de este enfoque es que el modelo por lo general no coincide con la verdadera forma de f.
+
+-   No paramétricos: No se hace supociones de la forma funcional de f, se busca una estimación de f que se acerque lo mejor posible a los puntos de datos sin ser demasiado ondulado. Evita la posibilidad que el modelo no se ajuste a los datos.
+
+    nota: Una desventaja es que se requiere un gran numero de observaciones para obtener la estimación precisas de f.
+
+# Regresión lineal
+
+Es un método de aprendizaje supervisado, se puede lograr predecir una respuesta cuantitativa, esto, con el objetivo de poder procesar dos o más grupos de datos y encontrar una relación entre ellos.
+
+Así también, la regresión lineal se convierte en una herramienta útil al tener datos con una tendencia lineal de relación logrando cuantificar su relación de interacción.
+
+### Regresión lineal simple
+
+Es aplicada para predecir una respuesta cuantitativa *Y* a partir de una variable predictiva única *X,* esto suponiendo que existe una relación casi lineal entre X y Y. Esto se puede representar en una ecuación como:
+
+$$Y ≈ 𝛽0 + 𝛽1X + ∊$$
+
+La ecuación se representaría como: "Regresión de Y sobre X", en donde 𝛽0+𝛽1 son parámetros desconocidos que representan la intersección y la pendiente de los parámetros. Una vez utilizados datos de entrenamiento para estimar 𝛽0+𝛽1 se podrá realiza una predicción de datos futuros.
+
+### Estimación de coeficientes 𝛽0+𝛽1
+
+El objetivo principal es obtener valores pertenecientes a cada uno de los coeficientes, tal que, se logre obtener o describir un modelo lineal, esto se logra mediante la representación de "pares de observaciones" en las cuales se obtengan una medida de X y una medida de Y, eso con el objetivo de tener estimaciones para los coeficientes 𝛽0, 𝛽1 tal que el modelo se ajuste a los datos disponibles hasta encontrar una intersección 𝛽0 y una pendiente 𝛽1, esto se lo puede lograr con el criterio de mínimos cuadrados. Se muestra un ejemplo de la relación lineal entre las ventas de una empresa y los gastos de publicidad en TV.
+
+imagen
+
+Es importante considerar el nivel de error en la aproximación, el cual determina la posible variación en el eje Y que hace que los datos no tengan un carácter lineal. Esto define la línea de regresión de la población. Aplicando la estrategia de mínimos cuadrados podemos obtener una nueva línea basada en los datos observados.
+
+imagen
+
+En la figura de la derecha se observa en color rojo la línea real de aproximación, mientras en color negro la línea de mínimos cuadrados en base a las observaciones, mientras que en la derecha se observan líneas basadas en mínimos cuadrados calculadas mediante observaciones aleatorias, estas estimaciones no se alejan demasiado de la regresión lineal de la población (línea roja).
+
+Como conclusión la regresión lineal simple es un enfoque útil para predecir una respuesta sobre la base de una única variable predictora.
+
+### Regresión lineal múltiple
+
+A diferencia de la regresión lineal simple, en la realidad existe más de un predictor, por ello, en vez de realizar varias regresiones lineales simples en donde se sesgan varios datos se debe realizar una regresión lineal múltiple. Esto se puede representar en una ecuación como:
+
+$$
+Y ≈ 𝛽_0 + 𝛽_1X_1 + 𝛽_2X_2+...+ 𝛽_pX_p + ∊
+$$
+
+En donde X1, X2 ... Xp con índices predictores.
+
+#### Estimación de los coeficientes de regresión
+
+Al igual que en la regresión lineal simple los coeficientes 𝛽0, 𝛽1 ... 𝛽p son los que deben estimarse y en base a estas estimaciones se pueden llagar a hacer predicciones. Para esta estimación se utiliza el mismo enfoque de mínimos cuadrados.
+
+Para representar las estimaciones de coeficientes de regresión lineal múltiple se lo debe hacer mediante algebra matricial por medio de un paquete estadístico.
+
+Es necesario responder ciertas preguntas al realizar regresión lineal múltiple:
+
+-   **¿Existe alguna relación entre la respuesta y los predictores?**
+
+    En este caso se debe plantear una hipótesis nula en donde 𝛽0, 𝛽1 ... 𝛽p = 0 y una hipótesis alternativa, en donde 𝛽0, 𝛽1 ... 𝛽p ≠ 0 , aplicando la fórmula podemos obtener un falor de F en el cual se determina un valor cercano a 1 cuando no hay relación entre la pregunta y la respuesta, mientras que si existiera relación el valor sería superior a 1.
+
+-   **Decidir sobre variables importantes**
+
+    Al determinar que los predictores si tienen una relación con las peguntas es necesario determinar cuales de ellos establecen esta relación. Para ello, es necesario realizar una selección de variables aplicando el método de Criterio de Información de Akaike u otro a conveniencia. Estos establecen 3 enfoques clásicos:
+
+-   Selección hacia adelante: Implica iniciar con un modelo nulo, se ajustan regresiones lineales simples y se selecciona la variable con carácter mas bajo continuando con el ejercicio hasta cumplir con la regla de detención.
+
+-   Selección hacia atrás: Se inicia con todas las variables, eliminando la variable con carácter mas alto, es decir, la menos significativa estadísticamente.
+
+-   Selección mixta: es una combinación de selección hacia adelante y hacia atrás
+
+imagen
+
+Se observa una grafica de los datos obtenidos, en donde existen 2 predictores y una sola respuesta, esto en un plano 3D.
+
+Al ajustar un modelo a una regresión lineal pueden ocurrir varios problemas, entre los cuales están:
+
+-   **No linealidad de las relaciones respuesta-predictor:** Esto conlleva a que todas las conclusiones sean cuestionables y la precisión de predicción se reducen significativamente, esto se lo puede evitar aplicando los " gráficos de residuos"
+
+-   **Valores atípicos:** Estos valores surgen entre una de sus razones por el registro incorrecto de una observación durante la recopilación de datos, así mismo se pueden utilizar " gráficos de residuos" para determinar el valor atípico y retíralo, esto mejorará la ecuación de linealidad obtenida.
+
+-   **Puntos de apalancamiento:** son observaciones que se encuentran fuera del conglomerado de datos, esto produce que la ecuación de linealidad tienda a flexionarse de acuerdo al nivel de apalancamiento de la observación, mientras mas alejada este la observación del conjunto de observaciones mayor grado de apalancamiento habrá.
+
+imagen
+
+Como se observa en la figura de la izquierda, la observación 41 presenta un mayor grado de apalancamiento con respecto a la observación 20, así mismo, en la figura central se evidencia una observación inusual fuera del grupo de datos, esto produce un alto apalancamiento; mientras que en la figura de la derecha se observa un punto 41 con un grado muy alto de apalancamiento.
